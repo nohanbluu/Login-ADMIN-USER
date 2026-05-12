@@ -1,14 +1,19 @@
 <?php
-function getDB(): PDO {
-    $host = getenv('DB_HOST') ?: 'db';
-    $port = getenv('DB_PORT') ?: '3306';
-    $name = getenv('DB_NAME') ?: 'myapp';
-    $user = getenv('DB_USER') ?: 'root';
-    $pass = getenv('DB_PASS') ?: 'secret';
+function getDB() {
+    $host     = getenv('MYSQLHOST')     ?: 'localhost';
+    $port     = getenv('MYSQLPORT')     ?: '3306';
+    $dbname   = getenv('MYSQLDATABASE') ?: 'railway';
+    $user     = getenv('MYSQLUSER')     ?: 'root';
+    $password = getenv('MYSQLPASSWORD') ?: '';
 
-    $dsn = "mysql:host=$host;port=$port;dbname=$name;charset=utf8mb4";
-    return new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+
+    try {
+        $pdo = new PDO($dsn, $user, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
+        return $pdo;
+    } catch (PDOException $e) {
+        die("Koneksi DB gagal: " . $e->getMessage());
+    }
 }
