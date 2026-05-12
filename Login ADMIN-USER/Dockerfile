@@ -1,8 +1,12 @@
 FROM php:8.2-apache
 
-# Fix MPM conflict
-RUN a2dismod mpm_event mpm_worker 2>/dev/null; \
-    a2enmod mpm_prefork
+# Fix MPM conflict - hapus semua dulu, baru enable prefork
+RUN rm -f /etc/apache2/mods-enabled/mpm_*.conf \
+          /etc/apache2/mods-enabled/mpm_*.load \
+    && ln -s /etc/apache2/mods-available/mpm_prefork.conf \
+             /etc/apache2/mods-enabled/mpm_prefork.conf \
+    && ln -s /etc/apache2/mods-available/mpm_prefork.load \
+             /etc/apache2/mods-enabled/mpm_prefork.load
 
 # Install ekstensi
 RUN docker-php-ext-install pdo pdo_mysql
