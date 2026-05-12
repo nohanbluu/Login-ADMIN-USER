@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Fix MPM conflict - hapus semua dulu, baru enable prefork
+# Fix MPM di build time
 RUN rm -f /etc/apache2/mods-enabled/mpm_*.conf \
           /etc/apache2/mods-enabled/mpm_*.load \
     && ln -s /etc/apache2/mods-available/mpm_prefork.conf \
@@ -21,5 +21,12 @@ COPY . /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+
+# Override entrypoint agar fix MPM jalan setiap container start
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
 
 EXPOSE 80
