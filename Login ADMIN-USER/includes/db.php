@@ -1,10 +1,10 @@
 <?php
 function getDB() {
-    $host     = getenv('MYSQLHOST')     ?: 'localhost';
+    $host     = getenv('MYSQLHOST')     ?: 'mysql.railway.internal';
     $port     = getenv('MYSQLPORT')     ?: '3306';
     $dbname   = getenv('MYSQLDATABASE') ?: 'railway';
     $user     = getenv('MYSQLUSER')     ?: 'root';
-    $password = getenv('MYSQLPASSWORD') ?: '';
+    $password = getenv('MYSQLPASSWORD') ?: 'stFmBHfhyMBNAqlFzpwfhpEpnNGrqXEX';
 
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
 
