@@ -11,7 +11,7 @@ function getDB(): PDO {
     static $pdo = null;
     if ($pdo === null) {
         // Railway inject variabel ini secara otomatis
-        $host = getenv('MYSQLHOST')     ?: getenv('DB_HOST')     ?: 'localhost';
+        $host = getenv('MYSQLHOST')     ?: getenv('DB_HOST')     ?: 'mysql.railway.internal';
         $port = getenv('MYSQLPORT')     ?: getenv('DB_PORT')     ?: '3306';
         $name = getenv('MYSQLDATABASE') ?: getenv('DB_NAME')     ?: 'railway';
         $user = getenv('MYSQLUSER')     ?: getenv('DB_USER')     ?: 'root';
