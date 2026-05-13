@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Login — Sistem Keamanan</title>
+  <title>Login Sistem Keamanan</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
