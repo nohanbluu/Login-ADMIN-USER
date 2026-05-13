@@ -65,7 +65,7 @@ $username = $_SESSION['username'];
 <div class="topbar">
   <div class="topbar-brand">Sistem Keamanan</div>
   <div class="topbar-right">
-    <span>👤 <?= htmlspecialchars($username) ?></span>
+    <span><?= htmlspecialchars($username) ?></span>
     <span class="badge-user">USER</span>
     <a href="/logout.php" class="btn-logout">⏏ Logout</a>
   </div>
