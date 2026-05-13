@@ -15,7 +15,7 @@ function getDB(): PDO {
         $port = getenv('MYSQLPORT')     ?: getenv('DB_PORT')     ?: '3306';
         $name = getenv('MYSQLDATABASE') ?: getenv('DB_NAME')     ?: 'railway';
         $user = getenv('MYSQLUSER')     ?: getenv('DB_USER')     ?: 'root';
-        $pass = getenv('MYSQLPASSWORD') ?: getenv('DB_PASSWORD') ?: '';
+        $pass = getenv('MYSQLPASSWORD') ?: getenv('DB_PASSWORD') ?: 'stFmBHfhyMBNAqlFzpwfhpEpnNGrqXEX';
 
         $dsn = "mysql:host=$host;port=$port;dbname=$name;charset=utf8mb4";
 
