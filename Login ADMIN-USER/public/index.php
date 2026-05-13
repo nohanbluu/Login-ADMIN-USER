@@ -63,7 +63,7 @@ $username = $_SESSION['username'];
 <body>
 
 <div class="topbar">
-  <div class="topbar-brand">🛡️ Sistem Keamanan</div>
+  <div class="topbar-brand">Sistem Keamanan</div>
   <div class="topbar-right">
     <span>👤 <?= htmlspecialchars($username) ?></span>
     <span class="badge-user">USER</span>
@@ -73,7 +73,7 @@ $username = $_SESSION['username'];
 
 <div class="main">
   <div class="welcome">
-    <h1>Selamat datang, <?= htmlspecialchars($username) ?>! 👋</h1>
+    <h1>Selamat datang, <?= htmlspecialchars($username) ?>!</h1>
     <p>Kamu login sebagai <strong>User</strong>. Halaman admin tidak dapat diakses.</p>
   </div>
 
