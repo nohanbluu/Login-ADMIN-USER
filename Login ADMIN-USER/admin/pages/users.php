@@ -146,13 +146,13 @@ require_once __DIR__ . '/../../includes/header.php';
           </td>
           <td>
             <a href="?edit=<?= $u['id'] ?>" class="btn btn-sm"
-               style="border:1px solid var(--border);color:var(--text-muted)">✏️</a>
+               style="border:1px solid var(--border);color:var(--text-muted)">Edit</a>
             <a href="?toggle=<?= $u['id'] ?>" class="btn btn-sm"
                style="border:1px solid var(--border);color:var(--yellow)"
                onclick="return confirm('Ubah status user ini?')">⟳</a>
             <?php if ($u['id'] != $_SESSION['user_id']): ?>
             <a href="?delete=<?= $u['id'] ?>" class="btn btn-sm btn-danger"
-               onclick="return confirm('Hapus user <?= e($u['username']) ?>?')">🗑️</a>
+               onclick="return confirm('Hapus user <?= e($u['username']) ?>?')">Delete</a>
             <?php endif; ?>
           </td>
         </tr>
@@ -201,7 +201,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <?php if ($editUser): ?>
 <div class="modal-overlay show" id="modalEdit">
   <div class="modal-box">
-    <div class="modal-title">✏️ Edit User: <?= e($editUser['username']) ?></div>
+    <div class="modal-title">Edit User: <?= e($editUser['username']) ?></div>
     <form method="POST">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="edit_id" value="<?= $editUser['id'] ?>">
