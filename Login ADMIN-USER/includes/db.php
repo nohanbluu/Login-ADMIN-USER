@@ -1,6 +1,6 @@
 <?php
 function getDB() {
-    $host     = getenv('MYSQLHOST')     ?: 'mysql.railway.internal';
+    $host     = getenv('MYSQLHOST')     ?: 'localhost';
     $port     = getenv('MYSQLPORT')     ?: '3306';
     $dbname   = getenv('MYSQLDATABASE') ?: 'railway';
     $user     = getenv('MYSQLUSER')     ?: 'root';
