@@ -1,21 +1,40 @@
 <?php
-require_once __DIR__ . '/db.php';
+/**
+ * includes/auth.php
+ * Helper: cek login & hak akses (role)
+ */
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-function requireRole(string $role): void {
-    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== $role) {
+/** Cek apakah user sudah login */
+function isLoggedIn(): bool {
+    return !empty($_SESSION['user_id']) && !empty($_SESSION['role']);
+}
+
+/** Paksa login — redirect ke login.php jika belum masuk */
+function requireLogin(): void {
+    if (!isLoggedIn()) {
         header('Location: /login.php');
         exit;
     }
 }
 
-function logActivity(int $userId, string $username, string $action): void {
-    // Log ke file
-    $log = date('Y-m-d H:i:s') . " | user:$username($userId) | $action\n";
-    file_put_contents(__DIR__ . '/../logs/activity.log', $log, FILE_APPEND);
+/** Paksa role tertentu — tampilkan 403 jika tidak sesuai */
+function requireRole(string $role): void {
+    requireLogin();
+    if ($_SESSION['role'] !== $role) {
+        http_response_code(403);
+        echo '<!DOCTYPE html><html><head><meta charset="UTF-8">
+        <style>body{background:#0f0f0f;color:#e0e0e0;font-family:sans-serif;
+        display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column;gap:12px}
+        h1{color:#ef5350;font-size:64px;margin:0}a{color:#4f8ef7}</style></head><body>
+        <h1>403</h1><p>Akses ditolak — halaman ini hanya untuk <strong>' . htmlspecialchars($role) . '</strong>.</p>
+        <a href="/login.php">← Kembali ke Login</a></body></html>';
+        exit;
+    }
 }
 
-function e(string $str): string {
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+/** Cek apakah user adalah admin */
+function isAdmin(): bool {
+    return isLoggedIn() && $_SESSION['role'] === 'admin';
 }
